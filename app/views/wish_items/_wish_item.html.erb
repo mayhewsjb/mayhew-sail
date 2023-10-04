@@ -1,0 +1,22 @@
+<div id="<%= dom_id wish_item %>">
+  <p>
+    <strong>Name:</strong>
+    <%= wish_item.name %>
+  </p>
+
+  <p>
+    <strong>Price:</strong>
+    <%= wish_item.formatted_price %>
+  </p>
+
+  <p>
+    <strong>Use:</strong>
+    <%= wish_item.use %>
+  </p>
+
+  <p>
+    <strong>Paid For:</strong>
+    <%= wish_item.paid_for ? 'Yes' : 'No' %>
+  </p>
+
+</div>

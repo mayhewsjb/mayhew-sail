@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Wish items</h1>
+<div> Total cost - <%= @wish_items_total %> <br>Remaining cost - <%= @wish_items_remaining %> <br>Paid cost - <%= @wish_items_paid %></div>
+<br>
+
+<div id="wish_items">
+  <% @wish_items.each do |wish_item| %>
+    <%= render wish_item %>
+    <p>
+      <%= link_to "Show this wish item", wish_item %>
+    </p>
+  <% end %>
+</div>
+
+
+<%= link_to "New wish item", new_wish_item_path %>

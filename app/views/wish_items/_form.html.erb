@@ -1,0 +1,37 @@
+<%= form_with(model: wish_item) do |form| %>
+  <% if wish_item.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(wish_item.errors.count, "error") %> prohibited this wish_item from being saved:</h2>
+
+      <ul>
+        <% wish_item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :price, style: "display: block" %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :use, style: "display: block" %>
+    <%= form.text_area :use %>
+  </div>
+
+  <div>
+    <%= form.label :paid_for, "Paid For:", style: "display: block" %>
+    <%= form.check_box :paid_for, checked: wish_item.paid_for.nil? ? false : wish_item.paid_for %>
+  </div>
+
+  <div>
+    <%= form.submit wish_item.persisted? ? "Update Item" : "Add to Wishlist"%>
+  </div>
+<% end %>
