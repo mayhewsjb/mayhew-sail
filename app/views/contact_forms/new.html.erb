@@ -1,0 +1,13 @@
+<%= form_with(model: @contact_form, local: true) do |form| %>
+  <!-- form fields for name, email, and message -->
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :email %>
+  <%= form.email_field :email %>
+
+  <%= form.label :message %>
+  <%= form.text_area :message %>
+
+  <%= form.submit "Submit" %>
+<% end %>

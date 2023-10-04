@@ -1,0 +1,16 @@
+<!-- app/views/contact_forms/admin_index.html.erb -->
+<!-- List of all contact form submissions with links to mark them as dealt_with or not -->
+<% @contact_forms.each do |contact_form| %>
+  <%= contact_form.name %>
+  <%= contact_form.email %>
+  <%= contact_form.message %>
+  <%= contact_form.dealt_with ? 'Dealt With' : 'Pending' %>
+
+  <% if contact_form.dealt_with? %>
+    <%= button_to 'Mark as Pending', contact_form_path(contact_form, contact_form: { dealt_with: false }), method: :patch %>
+  <% else %>
+    <%= button_to 'Mark as Dealt With', contact_form_path(contact_form, contact_form: { dealt_with: true }), method: :patch %>
+  <% end %>
+
+  <!-- Other admin actions like deleting -->
+<% end %>
