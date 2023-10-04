@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: %i[ show edit update destroy ]
 
   # GET /events
@@ -43,6 +44,10 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     redirect_to events_url, notice: "Event was successfully destroyed."
+  end
+
+  def admin_index
+    @events = Event.all
   end
 
   private

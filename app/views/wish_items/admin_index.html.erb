@@ -1,0 +1,31 @@
+<h1>Wishlist Admin Index</h1>
+
+<%= link_to 'New Wishlist Item', new_wish_item_path %>
+<div>
+  Total cost - <%= format_price(@wish_items_total) %> <br>
+  Remaining cost - <%= format_price(@wish_items_remaining) %> <br>
+  Paid cost - <%= format_price(@wish_items_paid) %>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Paid For</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @wish_item.each do |wish_item| %>
+      <tr>
+        <td><%= link_to wish_item.name, wish_item %></td>
+        <td><%= wish_item.price %></td>
+        <td><%= wish_item.paid_for? %></td>
+        <td>
+          <%= link_to 'Edit', edit_wish_item_path(wish_item) %> |
+          <%= link_to 'Delete', wish_item, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

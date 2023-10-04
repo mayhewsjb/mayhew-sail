@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts
@@ -43,6 +44,10 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     redirect_to posts_url, notice: "Post was successfully destroyed."
+  end
+
+  def admin_index
+    @posts = Post.all
   end
 
   private

@@ -1,4 +1,5 @@
 class WishItemsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_wish_item, only: %i[ show edit update destroy ]
 
   # GET /wish_items
@@ -46,6 +47,13 @@ class WishItemsController < ApplicationController
   def destroy
     @wish_item.destroy
     redirect_to wish_items_url, notice: "Wish item was successfully destroyed."
+  end
+
+  def admin_index
+    @wish_item = WishItem.all
+    @wish_items_total = WishItem.sum(:price)
+    @wish_items_paid = WishItem.where(paid_for: true).sum(:price)
+    @wish_items_remaining = WishItem.where(paid_for: false).sum(:price)
   end
 
   private
