@@ -1,8 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Wish items</h1>
-<div> Total cost - <%= @wish_items_total %> <br>Remaining cost - <%= @wish_items_remaining %> <br>Paid cost - <%= @wish_items_paid %></div>
+<div>
+  Total cost - <%= format_price(@wish_items_total) %> <br>
+  Remaining cost - <%= format_price(@wish_items_remaining) %> <br>
+  Paid cost - <%= format_price(@wish_items_paid) %>
+</div>
 <br>
+
 
 <div id="wish_items">
   <% @wish_items.each do |wish_item| %>
