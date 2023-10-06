@@ -9,6 +9,10 @@ gem 'devise'
 
 gem "dotenv-rails"
 
+gem "cloudinary"
+
+gem 'simple_form'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8"
 
