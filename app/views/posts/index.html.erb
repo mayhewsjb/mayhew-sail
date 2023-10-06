@@ -1,13 +1,25 @@
-<p style="color: green"><%= notice %></p>
+<div>
+  <p style="color: green"><%= notice %></p>
 
-<h1>Posts</h1>
+  <div class="blog-headings">
+    <h1> Blog Posts</h1>
+    <% if user_signed_in? %>
+      <%= link_to "New post", new_post_path, class: "btn btn-primary mt-2" %>
+    <% end %>
+  </div>
 
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
-  <% end %>
+
+  <div id="posts" class="posts-container">
+    <% @posts.each do |post| %>
+      <div class="post-item">
+        <h3>
+          <%= post.title %>
+        </h3>
+        <h5><%= post.created_at.strftime('%b %d, %Y') %> - <%= post.author %></h5>
+        <p>
+          <%= link_to "Show this post", post, class: "btn btn-outline-primary" %>
+        </p>
+      </div>
+    <% end %>
+  </div>
 </div>
-<%= link_to "New post", new_post_path %>

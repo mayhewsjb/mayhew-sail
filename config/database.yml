@@ -23,7 +23,6 @@ default: &default
   username: saildev
   password: <%= ENV.fetch("SAILDEV_DATABASE_PASSWORD") { 'Plantmag34' } %>
 
-
 development:
   <<: *default
   database: mayhew_sail_development
@@ -87,4 +86,3 @@ production:
   database: mayhew_sail_production
   username: mayhew_sail
   password: <%= ENV["MAYHEW_SAIL_DATABASE_PASSWORD"] %>
-
