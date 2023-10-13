@@ -1,22 +1,42 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <p class="text-success"><%= notice %></p>
 
-<h1>Wish items</h1>
-<div>
-  Total cost - <%= format_price(@wish_items_total) %> <br>
-  Remaining cost - <%= format_price(@wish_items_remaining) %> <br>
-  Paid cost - <%= format_price(@wish_items_paid) %>
+      <h1 class="mb-3">Wish Items</h1>
+
+      <div class="mb-3">
+        <p>Total cost: <strong><%= format_price(@wish_items_total) %></strong></p>
+        <p>Remaining cost: <strong><%= format_price(@wish_items_remaining) %></strong></p>
+        <p>Paid cost: <strong><%= format_price(@wish_items_paid) %></strong></p>
+      </div>
+      <%= link_to "New Wish Item", new_wish_item_path, class: "btn btn-success my-4" %>
+      <div class="wish-border">
+        <h3 class="ms-2 mt-1">Items</h1>
+        <table class="wish-table table table-striped mb-3">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Paid For</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @wish_items.each do |wish_item| %>
+              <tr id="<%= dom_id(wish_item) %>">
+                <td><%= wish_item.name %></td>
+                <td><%= wish_item.formatted_price %></td>
+                <td><%= wish_item.paid_for ? 'Yes' : 'No' %></td>
+                <td>
+                  <%= link_to "Details", wish_item, class: "btn btn-primary btn-sm" %>
+                  <%# Add additional actions here if needed, e.g., Edit, Delete %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <div>
 </div>
-<br>
-
-
-<div id="wish_items">
-  <% @wish_items.each do |wish_item| %>
-    <%= render wish_item %>
-    <p>
-      <%= link_to "Show this wish item", wish_item %>
-    </p>
-  <% end %>
-</div>
-
-
-<%= link_to "New wish item", new_wish_item_path %>
