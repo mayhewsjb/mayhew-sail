@@ -10,10 +10,12 @@
         <p>Remaining cost: <strong><%= format_price(@wish_items_remaining) %></strong></p>
         <p>Paid cost: <strong><%= format_price(@wish_items_paid) %></strong></p>
       </div>
-      <%= link_to "New Wish Item", new_wish_item_path, class: "btn btn-success my-4" %>
       <div class="wish-border">
-        <h3 class="ms-2 mt-1">Items</h1>
-        <table class="wish-table table table-striped mb-3">
+        <div class="d-flex justify-content-begin align-items-center px-2 pt-2">
+          <h3>Items</h3>
+          <%= link_to "New Wish Item", new_wish_item_path, class: "btn new-wish-btn mb-1 ms-3" %>
+        </div>
+        <table class="wish-table table mb-3">
           <thead>
             <tr>
               <th>Name</th>
@@ -38,5 +40,5 @@
         </table>
       </div>
     </div>
-  <div>
+  </div>
 </div>

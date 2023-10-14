@@ -1,14 +1,23 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-4">
+  <p class="text-success"><%= notice %></p>
 
-<h1>Events</h1>
+  <h1 class="mb-4">Events</h1>
 
-<div id="events">
-  <% @events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "Show this event", event %>
-    </p>
+  <% @events.each_with_index do |event, index| %>
+    <div class="row align-items-center mb-4 event-card <%= index.even? ? 'bg-light' : 'bg-secondary text-white' %>">
+      <div class="col-md-2">
+        <h2 class="display-4"><%= event.start_time.strftime("%d") %></h2>
+        <h4><%= event.start_time.strftime("%B") %></h4>
+      </div>
+      <div class="col-md-8">
+        <h3><%= event.title %></h3>
+        <p><%= event.description.truncate(100) %></p>
+      </div>
+      <div class="col-md-2 justify-content-end">
+        <%= link_to "Details", event, class: "btn btn-primary" %>
+      </div>
+    </div>
   <% end %>
-</div>
 
-<%= link_to "New event", new_event_path %>
+  <%= link_to "New event", new_event_path, class: "btn btn-success" %>
+</div>

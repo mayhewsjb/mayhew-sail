@@ -1,13 +1,16 @@
 .wish-border {
-  border: 5px solid rgb(154, 228, 255);
-  border-radius: 15px;
+  border: 2px solid rgb(154, 228, 255);
+  border-radius: 9px;
   position: relative;
   z-index: 1000;
-  padding-top: 5px;  /* Add padding */
-  padding-bottom: 5px;
+  padding: 20px;
 }
 
 .wish-table {
   position: relative;
   z-index: 999;
+}
+
+.new-wish-btn {
+  background-color: rgb(111, 159, 255);
 }

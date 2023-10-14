@@ -1,9 +1,44 @@
-<h1>New wish item</h1>
+<div class="container mt-4">
+  <h1 class="mb-4">New Wish Item</h1>
 
-<%= render "form", wish_item: @wish_item %>
+  <%= form_with(model: @wish_item, local: true, class: 'needs-validation', novalidate: true) do |form| %>
+    <% if @wish_item.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(@wish_item.errors.count, "error") %> prohibited this wish item from being saved:</h4>
+        <ul>
+          <% @wish_item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<br>
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'form-control', required: true %>
+    </div>
 
-<div>
-  <%= link_to "Back to wish items", wish_items_path %>
+    <div class="form-group">
+      <%= form.label :price %>
+      <%= form.text_field :price, class: 'form-control', required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :use %>
+      <%= form.text_area :use, class: 'form-control', rows: 3, required: true %>
+    </div>
+
+    <div class="form-group form-check my-2">
+      <%= form.check_box :paid_for, class: 'form-check-input' %>
+      <%= form.label :paid_for, "Paid For", class: 'form-check-label' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit @wish_item.persisted? ? "Update Item" : "Add to Wishlist", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+  <div class="mt-3">
+    <%= link_to "Back to wish items", wish_items_path, class: "btn btn-secondary" %>
+  </div>
 </div>

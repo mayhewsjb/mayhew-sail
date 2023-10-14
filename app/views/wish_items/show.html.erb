@@ -1,10 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-4">
+  <p class="text-success"><%= notice %></p>
 
-<%= render @wish_item %>
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title"><%= @wish_item.name %></h2>
+      <p class="card-text">
+        <strong>Price:</strong> <%= @wish_item.formatted_price %><br>
+        <strong>Use:</strong> <%= @wish_item.use %><br>
+        <strong>Paid For:</strong> <%= @wish_item.paid_for ? 'Yes' : 'No' %>
+      </p>
+    </div>
+  </div>
 
-<div>
-  <%= link_to "Edit this wish item", edit_wish_item_path(@wish_item) %> |
-  <%= link_to "Back to wish items", wish_items_path %>
-
-  <%= button_to "Destroy this wish item", @wish_item, method: :delete %>
+  <div class="d-flex justify-content-between">
+    <%= link_to "Edit this wish item", edit_wish_item_path(@wish_item), class: "btn btn-warning" %>
+    <%= link_to "Back to wish items", wish_items_path, class: "btn btn-secondary" %>
+    <%= button_to "Destroy this wish item", @wish_item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+  </div>
 </div>
