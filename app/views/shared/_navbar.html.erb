@@ -1,47 +1,50 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid mx-3">
-    <a class="navbar-brand" href="<%= root_path %>">Mayhew Sailing</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<%= root_path %>">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= posts_path %>">Blog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= wish_items_path %>">Wishlist</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= events_path %>">Events</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= crew_path %>">Crew</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= new_contact_form_path %>">Contact Us</a>
-        </li>
+<nav class="navbar navbar-expand-lg navbar-light px-3">
+  <a class="navbar-brand my-1" href="/">Mayhew Sailing</a>
 
-        <% if user_signed_in? %> <!-- This checks if a user is signed in -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Admin
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="<%= admin_index_posts_path %>">Manage Blog Posts</a></li>
-              <li><a class="dropdown-item" href="<%= admin_index_wish_items_path %>">Manage Wishlist Items</a></li>
-              <li><a class="dropdown-item" href="<%= admin_index_events_path %>">Manage Events</a></li>
-              <li><a class="dropdown-item" href="<%= admin_index_contact_forms_path %>">Manage Contact Forms</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+  <label for="check" class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <input type="checkbox" id="check"/>
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="<%= root_path %>">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= posts_path %>">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= wish_items_path %>">Wishlist</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= events_path %>">Events</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= crew_path %>">Crew</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= new_contact_form_path %>">Contact Us</a>
+      </li>
+
+      <% if user_signed_in? %> <!-- This checks if a user is signed in -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Admin
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="<%= admin_index_posts_path %>">Manage Blog Posts</a></li>
+            <li><a class="dropdown-item" href="<%= admin_index_wish_items_path %>">Manage Wishlist Items</a></li>
+            <li><a class="dropdown-item" href="<%= admin_index_events_path %>">Manage Events</a></li>
+            <li><a class="dropdown-item" href="<%= admin_index_contact_forms_path %>">Manage Contact Forms</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </nav>
+<script></script>
