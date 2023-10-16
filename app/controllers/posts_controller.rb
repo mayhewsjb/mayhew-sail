@@ -5,6 +5,12 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     @posts = Post.all
+    @markers = @posts.select { |post| post.latitude.present? && post.longitude.present? && post.latitude != 0 && post.longitude != 0 }.map do |post|
+      {
+        lat: post.latitude,
+        lng: post.longitude
+      }
+    end
   end
 
   # GET /posts/1
@@ -58,6 +64,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :content, :author, photos: [], thumbnail_image: [])
+      params.require(:post).permit(:title, :content, :author, :address, :latitude, :longitude, photos: [], thumbnail_image: [])
     end
 end

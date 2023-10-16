@@ -21,6 +21,10 @@
 
   <%= form.input :thumbnail_image, label: "Thumbnail - The singular photo on the blog post from the blog page", as: :file %>
 
+  <%= form.input :latitude, label: 'Latitude', hint: 'If known, otherwise it will be calculated from address.' %>
+
+  <%= form.input :longitude, label: 'Longitude', hint: 'If known, otherwise it will be calculated from address.' %>
+
   <div>
     <%= form.button :submit, post.persisted? ? "Update Post" : "Create Post", class: "btn btn-primary" %>
   </div>

@@ -8,6 +8,8 @@
     <% end %>
   </div>
 
+  <div id='map' style='width: 400px; height: 300px;'></div>
+
   <div id="posts" class="posts-container">
     <% @posts.each do |post| %>
       <div class="post-item">
@@ -22,3 +24,26 @@
     <% end %>
   </div>
 </div>
+<script>
+  mapboxgl.accessToken = '<%= ENV["MAPBOX_API_KEY"] %>';
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    center: [0, 0], // This will be overridden by fitBounds
+    zoom: 1         // This will be overridden by fitBounds
+  });
+
+  var markers = <%= raw @markers.to_json %>;
+  var bounds = new mapboxgl.LngLatBounds();
+
+  markers.forEach(function(marker) {
+    // Extend the bounds to include the new marker's position
+    bounds.extend([marker.lng, marker.lat]);
+    new mapboxgl.Marker().setLngLat([marker.lng, marker.lat]).addTo(map);
+  });
+
+  // Fit the map to the bounds of the markers with a padding
+  if (markers.length > 0) {
+    map.fitBounds(bounds, { padding: 30 });
+  }
+</script>

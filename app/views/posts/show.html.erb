@@ -1,5 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
+<div id='map' style='width: 400px; height: 300px;'></div>
+
 <%= render @post %>
 
 <div>
@@ -8,3 +10,14 @@
 
   <%= button_to "Destroy this post", @post, method: :delete %>
 </div>
+<script>
+  mapboxgl.accessToken = '<%= ENV["MAPBOX_API_KEY"] %>';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [<%= @post.longitude %>, <%= @post.latitude %>],
+    zoom: 14
+  });
+
+  new mapboxgl.Marker().setLngLat([<%= @post.longitude %>, <%= @post.latitude %>]).addTo(map);
+</script>
