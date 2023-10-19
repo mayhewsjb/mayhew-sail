@@ -2,8 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-left: 40px;
-  margin-right: 40px;
+
 }
 
 .post-item {
@@ -46,5 +45,6 @@
 }
 
 .blog-headings {
-  margin: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
 }

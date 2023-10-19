@@ -8,7 +8,12 @@ class PostsController < ApplicationController
     @markers = @posts.select { |post| post.latitude.present? && post.longitude.present? && post.latitude != 0 && post.longitude != 0 }.map do |post|
       {
         lat: post.latitude,
-        lng: post.longitude
+        lng: post.longitude,
+        title: post.title,
+        author: post.author,
+        created_at: post.created_at.strftime('%b %d, %Y'),
+        link: post_path(post),
+        id: post.id
       }
     end
   end

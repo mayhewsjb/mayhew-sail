@@ -1,49 +1,76 @@
-<div>
+<div class="container mt-4">
   <p style="color: green"><%= notice %></p>
 
-  <div class="blog-headings">
-    <h1> Blog Posts</h1>
+  <div class="blog-headings mb-4">
+    <h1 class="display-4"> Blog Posts</h1>
     <% if user_signed_in? %>
-      <%= link_to "New post", new_post_path, class: "btn btn-primary mt-2" %>
+      <%= link_to "New post", new_post_path, class: "btn btn-primary" %>
     <% end %>
   </div>
+</div>
 
-  <div id='map' style='width: 400px; height: 300px;'></div>
+  <div id='map' class="mb-4" style='width: 100%; height: 300px;'></div>
 
-  <div id="posts" class="posts-container">
+<div class="container mt-4">
+  <div id="posts" class="posts-container row">
     <% @posts.each do |post| %>
-      <div class="post-item">
-        <h3>
-          <%= post.title %>
-        </h3>
-        <h5><%= post.created_at.strftime('%b %d, %Y') %> - <%= post.author %></h5>
-        <p>
-          <%= link_to "Show this post", post, class: "btn btn-outline-primary" %>
-        </p>
+      <div class="col-md-4 col-sm-6 post-item">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title">
+              <%= post.title %>
+            </h3>
+            <h5 class="card-subtitle text-muted"><%= post.created_at.strftime('%b %d, %Y') %> - <%= post.author %></h5>
+            <%= link_to "Show this post", post, class: "btn btn-outline-primary btn-block mt-3" %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
 </div>
+
 <script>
+document.addEventListener('turbo:load', function() {
+
   mapboxgl.accessToken = '<%= ENV["MAPBOX_API_KEY"] %>';
-  const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v12', // style URL
-    center: [0, 0], // This will be overridden by fitBounds
-    zoom: 1         // This will be overridden by fitBounds
-  });
 
   var markers = <%= raw @markers.to_json %>;
+
+  // Calculate the most recent timestamp from all the markers
+  const mostRecentTimestamp = Math.max(...markers.map(marker => new Date(marker.created_at).getTime()));
+
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v12',
+    center: [0, 0],
+    zoom: 1
+  });
+
   var bounds = new mapboxgl.LngLatBounds();
 
   markers.forEach(function(marker) {
-    // Extend the bounds to include the new marker's position
     bounds.extend([marker.lng, marker.lat]);
-    new mapboxgl.Marker().setLngLat([marker.lng, marker.lat]).addTo(map);
+
+    var popupContent = `
+      <h6 class="me-3"><a href="/posts/${marker.id}">${marker.title}</a></h6>
+      <p style="margin-bottom: 0px;">${marker.created_at}</p>
+    `;
+
+    var popup = new mapboxgl.Popup({ offset: 0 }).setHTML(popupContent);
+
+    // Determine the color of the marker based on the timestamp
+    var markerColor = new Date(marker.created_at).getTime() === mostRecentTimestamp ? 'red' : 'blue';
+
+    new mapboxgl.Marker({ color: markerColor })
+      .setLngLat([marker.lng, marker.lat])
+      .setPopup(popup)
+      .addTo(map);
   });
 
   // Fit the map to the bounds of the markers with a padding
   if (markers.length > 0) {
     map.fitBounds(bounds, { padding: 30 });
   }
+});
+
 </script>
